@@ -6,8 +6,8 @@ export default async function Home() {
   const session = await auth()
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {!session?.user ? <SignIn/> : <SignOut/>}
+    <main className="flex min-h-screen flex-col items-start justify-between p-24 w-5/6">
+      dashboard
     </main>
   );
 }
