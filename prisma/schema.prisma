@@ -23,7 +23,7 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+  Invoice Invoice[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -81,4 +81,14 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([userId, credentialID])
+}
+
+model Invoice {
+  invoiceID String @id @default(cuid())
+  email String
+  amount String
+  date DateTime @default(now())
+  status String
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
