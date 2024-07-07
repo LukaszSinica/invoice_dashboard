@@ -86,7 +86,7 @@ model Authenticator {
 model Invoice {
   invoiceID String @id @default(cuid())
   email String
-  amount String
+  amount Float
   date DateTime @default(now())
   status String
   userId String

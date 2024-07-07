@@ -1,5 +1,5 @@
-import { fetchUsers, Users } from '@/lib/users/fetchUsers'
-import Link from 'next/link';
+import AddInvoice from '@/components/invoice/AddInvoice';
+import { fetchUsers } from '@/lib/users/fetchUsers'
 import React from 'react'
 
 export default async function InvoicePage() {
@@ -7,7 +7,7 @@ export default async function InvoicePage() {
   
   return (
     <div className="flex min-h-screen flex-col items-start justify-between p-24 w-5/6">
-        <Link href="/invoice/add">New Invoice</Link>
+        <AddInvoice users={users}/>
     </div>
   )
 }

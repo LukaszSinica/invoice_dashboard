@@ -5,6 +5,9 @@ const nextConfig = {
             new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
         )
         return nextConfig;
+    },
+    images: {
+        domains: ['lh3.googleusercontent.com']
     }
 };
 

@@ -20,7 +20,7 @@ export async function fetchUsers() {
       }
   
       const data: Users[] = await response.json();
-      console.log(data); // This will log on the server side
+
       return data;
     } catch (error) {
       console.error('Fetch error:', error);
