@@ -1,4 +1,5 @@
 import { prisma } from "@/auth";
+import { NextResponse } from "next/server";
 
 
 export async function POST(req: Request) {
@@ -20,4 +21,9 @@ export async function POST(req: Request) {
         return new Response(JSON.stringify(newInvoice))
     }   
     return new Response("Not Acceptable")
+}
+
+export async function GET() {
+    const invoices = await prisma.invoice.findMany()
+    return NextResponse.json(invoices, {status: 200});
 }
