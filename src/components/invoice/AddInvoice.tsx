@@ -48,15 +48,19 @@ export default function AddInvoice({...props}: UsersProps) {
   }
 
   return (
-    <form onSubmit={onSubmit} >
-        <select name="user" id="user" value={formData.user} onChange={handleChange}>
-          {userOptions}
-        </select>
-        <div>
-          Amount:
-          <input type="number" name="amount" id="amount" value={formData.amount}  onChange={handleChange}/>
+    <form onSubmit={onSubmit} className='flex flex-col w-1/2 bg-gray-100 rounded-lg p-8 shadow-lg'>
+        <h1 className="font-bold text-2xl pb-8">Create Invoice</h1>
+        <div className="flex flex-col pb-4">
+          <label htmlFor='user' className="pb-2">Chose user </label>
+          <select name="user" id="user" value={formData.user} onChange={handleChange} className='rounded-md h-12 bg-white-200 pl-4 shadow-md'>
+            {userOptions}
+          </select>
         </div>
-        <button type="submit">Submit</button>
+        <div className="flex flex-col pb-8">
+          <label htmlFor='amount' className="pb-2">Amount </label>
+          <input type="number" name="amount" id="amount" value={formData.amount}  onChange={handleChange} className='rounded-md h-12 bg-white-200 pl-4 shadow-md'/>
+        </div>
+        <button type="submit" className='rounded-md bg-blue-400 border-1 shadow-md h-12 text-white text-lg'>Submit</button>
         {response}
     </form>
   )
