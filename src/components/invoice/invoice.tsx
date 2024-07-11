@@ -2,8 +2,6 @@ import { Invoices } from '@/lib/invoices/fetchInvoice'
 import React from 'react'
 import InvoiceStatusSelect from '../ui/invoiceStatusSelect';
 
-
-
 export default function Invoice({...props}: Invoices) {
 
   return (

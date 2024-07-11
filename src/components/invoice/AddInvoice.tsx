@@ -1,6 +1,7 @@
 "use client"
 import { Users } from '@/lib/users/fetchUsers'
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import React, { ChangeEvent, FormEvent, useState, useTransition } from 'react'
 
 type UsersProps = {
   users: Users[]
@@ -15,6 +16,8 @@ export default function AddInvoice({...props}: UsersProps) {
 
   const [response, setResponse] = useState('');
   const [formData, setFormData] = useState<FormDataProps>({user: props.users[0].id, amount: 0});
+  const router = useRouter()
+  const [,startTransition] = useTransition()
 
   const userOptions = props.users.map((user) => 
       <option key={user.id} value={user.id}>
@@ -26,14 +29,19 @@ export default function AddInvoice({...props}: UsersProps) {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const response = await fetch('http://localhost:3000/api/invoices', {
+    await fetch('http://localhost:3000/api/invoices', {
       method: 'POST',
       body: JSON.stringify(formData),
+    }).then(() => {
+      startTransition(() => {
+        router.refresh()
+      })
+      router.push('/invoice');
+
+    }).catch((error) => {
+      setResponse(error);
     })
 
-    const data = await response.json();
-
-    setResponse(data);
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {

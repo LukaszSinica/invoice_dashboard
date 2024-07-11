@@ -1,6 +1,7 @@
 "use client"
 import { changeStatus } from '@/lib/invoices/changeInvoiceStatus';
-import React, { ChangeEvent } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { ChangeEvent, useTransition } from 'react'
 
 type InvoiceStatusSelectType = {
     invoiceID: string;
@@ -9,11 +10,15 @@ type InvoiceStatusSelectType = {
 
 export default function InvoiceStatusSelect({invoiceID, status}: InvoiceStatusSelectType) {
     const [newStatus, setNewStatus] = React.useState(status)
-
+    const router = useRouter();
+    const [,startTransition] = useTransition()
     const handleChange = async (event: ChangeEvent<HTMLSelectElement>) => {
         const newStatus = event.target.value;
         setNewStatus(newStatus);
         changeStatus({invoiceId: invoiceID, status: newStatus})
+        startTransition(() => {
+          router.refresh()
+        })
     }
 
   return (
