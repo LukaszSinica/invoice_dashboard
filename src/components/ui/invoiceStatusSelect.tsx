@@ -22,7 +22,7 @@ export default function InvoiceStatusSelect({invoiceID, status}: InvoiceStatusSe
     }
 
   return (
-    <select value={newStatus} onChange={handleChange}>
+    <select value={newStatus} onChange={handleChange} className='w-full h-full rounded-md h-8'>
         <option value="Pending">Pending</option>
         <option value="Paid">Paid</option>
     </select>
