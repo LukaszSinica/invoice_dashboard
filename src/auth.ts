@@ -15,5 +15,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async redirect() {
       return "/"
     },
-  }
+    session({session, token, user}) {
+      if(token.email == process.env.ADMIN_EMAIL) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            role: "admin"
+          }
+        }
+      }
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: "user"
+        }
+      }
+    }
+  },
+
 })
