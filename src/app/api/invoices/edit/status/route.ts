@@ -1,6 +1,12 @@
-import { prisma } from "@/auth";
+import { auth, prisma } from "@/auth";
+import { NextResponse } from "next/server";
 
-export async function PATCH(req: Request) {
+export const PUT = auth(async function PUT(req) {
+    if (!req.auth)
+        return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
+    if(req.auth.user?.role != "admin") 
+        return NextResponse.json({ message: "Not authorized" }, { status: 401 })
+
     const body = await req.json();
     const invoice = await prisma.invoice.update({
         where: {
@@ -15,4 +21,4 @@ export async function PATCH(req: Request) {
     }   
     
     return new Response("Not Acceptable")
-}
+})

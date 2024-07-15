@@ -14,7 +14,7 @@ type ChangeStatusProps = {
 export async function changeStatus({...props}: ChangeStatusProps) {
     try {
       const response = await fetch('http://localhost:3000/api/invoices/edit/status', {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
           Accept: 'application/json',
         },

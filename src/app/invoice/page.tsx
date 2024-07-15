@@ -9,7 +9,7 @@ export const revalidate = 0
 export default async function InvoicePage() {
   const invoices = await fetchInvoices()
   const session = await auth()
-
+  
   return (
     <div className="flex min-h-screen flex-col items-start p-24 w-5/6">
       {session?.user?.role == 'admin' && 
@@ -39,7 +39,9 @@ export default async function InvoicePage() {
                     email={invoice.email} 
                     amount={invoice.amount} 
                     date={invoice.date} 
-                    status={invoice.status} />
+                    status={invoice.status} 
+                    userRole={session?.user?.role}
+                    />
             )}
           </tbody>
         </table>
